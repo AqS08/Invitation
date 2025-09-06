@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="You're Invited! 🌸">
+    <meta property="og:description" content="Tap to view the invitation with flowers & animation ✨">
+    <meta property="og:image" content="https://yourdomain.com/invitation.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    <title>Invitation</title>
+    <style>
+        /* Reset */
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+
+        body {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(
+            135deg,
+            rgba(173, 216, 230, 0.6),
+            rgba(224, 255, 255, 0.6)
+        );
+        backdrop-filter: blur(3px);
+        position: relative;
+        font-family: Arial, sans-serif;
+        }
+
+        /* Invitation container */
+        .invitation-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        z-index: 10;
+        }
+
+        .invitation-container img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        object-fit: contain;
+        opacity: 0;
+        transform: scale(0.9);
+        animation: showUp 1.5s ease forwards;
+        }
+
+        @keyframes showUp {
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+        }
+
+        /* Falling petals */
+        .petal {
+        position: absolute;
+        top: -50px;
+        font-size: 22px;
+        opacity: 0.9;
+        animation: fall linear forwards;
+        z-index: 5;
+        }
+
+        @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="invitation-container">
+        <img src="inivtation.jpg" alt="Invitation">
+    </div>
+
+    <script>
+        // Petals
+        const petals = ["🌸", "🌺", "💮", "🌼"];
+        function createPetal() {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+        petal.style.left = Math.random() * window.innerWidth + "px";
+        petal.style.animationDuration = 4 + Math.random() * 4 + "s";
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), 8000);
+        }
+        setInterval(createPetal, 700);
+
+        // Responsiveness fix for resizing
+        window.addEventListener("resize", () => {
+        document.querySelectorAll(".petal").forEach(petal => petal.remove());
+        });
+    </script>
+</body>
+</html>
